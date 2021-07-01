@@ -10,6 +10,28 @@
 @import './variables';
 @import './mixins';
 
-social_button_bg {
-    color: $social_button_bg;   //imported from _variables
+.social-button {
+    font-size: larger;
+}
+
+.social-button-facebook {
+    
+    color: $facebook_bg;   //imported from _variables
+}
+
+.social-button-instagram {
+    color: $instagram_bg;   //imported from _variables
+}
+
+@font-face {
+    font-family: Futura-Bold;
+    src: url(../fonts/Futura-Bold.otf);
+}
+
+h1 {
+    font-family: Futura-Bold;
+}
+
+p {
+    font-family: Futura-Bold;
 }
