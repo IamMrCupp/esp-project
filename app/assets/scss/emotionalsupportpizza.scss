@@ -1,2 +1,15 @@
+// file: emotionalsupportpizza.scss
+//  - master file for SASS compiled assests
+
+// Bootstrap 5 via npm
 @import '../../../node_modules/bootstrap/scss/bootstrap.scss';
-@import '../../../node_modules/@fortawesome/fontawesome-free/scss/fontawesome'
+// Font-Awesome via npm
+@import '../../../node_modules/@fortawesome/fontawesome-free/scss/fontawesome';
+
+// bring in the custom stuff we made
+@import './variables';
+@import './mixins';
+
+social_button_bg {
+    color: $social_button_bg;   //imported from _variables
+}

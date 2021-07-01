@@ -16811,3 +16811,7 @@ readers do not read off random characters that represent icons */
   position: static;
   width: auto;
 }
+
+social_button_bg {
+  color: #898F9C;
+}
