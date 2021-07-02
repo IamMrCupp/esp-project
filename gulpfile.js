@@ -21,4 +21,9 @@ gulp.task('serve', gulp.series('sass', function() {
     gulp.watch("app/*.html").on('change', browserSync.reload);
 }));
 
+
+// default task is to serve this porject via browser-synv
 gulp.task('default', gulp.series('serve'));
+
+// build task builds and minify/uglify the css
+gulp.task('build', gulp.series('sass'));
