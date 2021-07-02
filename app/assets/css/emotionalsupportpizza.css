@@ -16812,8 +16812,21 @@ readers do not read off random characters that represent icons */
   width: auto;
 }
 
+@font-face {
+  font-family: Futura-Bold;
+  src: url(../fonts/Futura-Bold.otf);
+}
+h1, .h1 {
+  font-family: Futura-Bold;
+}
+
+p {
+  font-family: Futura-Bold;
+}
+
 .social-button {
-  font-size: larger;
+  font-size: xx-large;
+  text-decoration: none;
 }
 
 .social-button-facebook {
@@ -16824,14 +16837,48 @@ readers do not read off random characters that represent icons */
   color: #C13584;
 }
 
-@font-face {
-  font-family: Futura-Bold;
-  src: url(../fonts/Futura-Bold.otf);
+.social-button-linkedin {
+  color: #2867B2;
 }
-h1, .h1 {
+
+.logo-main {
+  width: 50%;
+  height: 50%;
+}
+
+.logo-footer {
+  height: 4rem;
+}
+
+.logo-header {
+  height: 4rem;
+  vertical-align: middle;
+}
+
+.site-container {
+  background-color: #a4cef8;
+}
+
+.site-footer {
+  background-color: #a4f8c4;
+}
+
+.site-footer-text {
   font-family: Futura-Bold;
 }
 
-p {
+.site-header {
+  background-color: #3ca04c;
+}
+
+.site-header-text {
+  font-family: Futura-Bold;
+}
+
+.site-navigation {
+  background-color: #a0803c;
+}
+
+.footer {
   font-family: Futura-Bold;
 }

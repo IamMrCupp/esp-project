@@ -6,28 +6,18 @@
 // Font-Awesome via npm
 @import '../../../node_modules/@fortawesome/fontawesome-free/scss/fontawesome';
 
-// bring in the custom stuff we made
+// bring in the custom variables and mixins
 @import './variables';
 @import './mixins';
 
-.social-button {
-    font-size: larger;
-}
 
-.social-button-facebook {
-    
-    color: $facebook_bg;   //imported from _variables
-}
-
-.social-button-instagram {
-    color: $instagram_bg;   //imported from _variables
-}
-
+// create a new font-family for use on the site
 @font-face {
     font-family: Futura-Bold;
     src: url(../fonts/Futura-Bold.otf);
 }
 
+// override the defaults for a few things
 h1 {
     font-family: Futura-Bold;
 }
@@ -35,3 +25,64 @@ h1 {
 p {
     font-family: Futura-Bold;
 }
+
+// create some new classes
+.social-button {
+    font-size: xx-large;
+    text-decoration: none;
+}
+
+.social-button-facebook {
+    color: $facebook_blue;
+}
+
+.social-button-instagram {
+    color: $instagram_pink;
+}
+
+.social-button-linkedin {
+    color: $linkedin_blue;
+}
+
+.logo-main {
+    width: 50%;
+    height: 50%;
+}
+
+.logo-footer {
+    height: 4.0rem;
+}
+
+.logo-header {
+    height: 4.0rem;
+    vertical-align: middle;
+    
+}
+
+.site-container {
+    background-color: #a4cef8;
+}
+
+.site-footer {
+    background-color: #a4f8c4;
+}
+
+.site-footer-text {
+    font-family: Futura-Bold;
+}
+
+.site-header {
+    background-color: #3ca04c;
+}
+
+.site-header-text {
+    font-family: Futura-Bold;
+}
+
+.site-navigation {
+    background-color: #a0803c;
+}
+
+.footer {
+    font-family: Futura-Bold;
+  }
