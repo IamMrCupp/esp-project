@@ -1,6 +1,7 @@
-var gulp        = require('gulp');
-var browserSync = require('browser-sync').create();
-var sass        = require('gulp-sass')(require('sass'));
+const gulp        = require('gulp');
+const browserSync = require('browser-sync').create();
+const sass        = require('gulp-sass')(require('sass'));
+//const cleanCSS    = require('gulp-clean-css'); 
 
 // Compile sass into CSS & auto-inject into browsers
 gulp.task('sass', function() {
@@ -9,6 +10,12 @@ gulp.task('sass', function() {
         .pipe(gulp.dest("app/assets/css"))
         .pipe(browserSync.stream());
 });
+
+// mangle to CSS to make the package smaller
+//gulp.task('', functio() => {
+//    return gulp.src("app/assets/*.css")
+//        .pipe
+//})
 
 // Static Server + watching scss/html files
 gulp.task('serve', gulp.series('sass', function() {
