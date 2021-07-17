@@ -1,9 +1,7 @@
 version: "3"
 
 services:
-    client:
-        image: mrcupp/esp-website
+    website:
+        image: iammrcupp/esp-website
         ports:
-            - 8080:80
-        volumes:
-            - ./app:/usr/share/nginx/html
+            - 8000:80
