@@ -1,4 +1,12 @@
 version: 2.1
+
+workflows:
+  build:
+    jobs:
+      - build:
+          context:
+              - esp-project
+
 jobs:
   build:
     machine:
@@ -19,5 +27,4 @@ jobs:
           name: Build from Dockerfile
           command: |
             TAG=edge make build
-      - run:
-          name: 
+
