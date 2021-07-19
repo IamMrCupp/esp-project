@@ -10,7 +10,7 @@ workflows:
 jobs:
   build:
     machine:
-      image:  cimg/node:16.5
+      image:  ubuntu-2004:latest
     environment:
       DOCKER_BUILDKIT: 1
       BUILDX_PLATFORMS: linux/amd64,linux/arm64,linux/arm/v6,linux/arm/v7,linux/riscv64,linux/386
