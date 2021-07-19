@@ -2,6 +2,6 @@ version: "3"
 
 services:
     website:
-        image: esp-website:latest
+        image: ${PROD_IMAGE}
         ports:
             - 8000:80
