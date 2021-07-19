@@ -2,6 +2,6 @@ version: "3"
 
 services:
     website:
-        image: ${PROD_IMAGE}
+        image: ${IMAGE}
         ports:
             - 8000:80

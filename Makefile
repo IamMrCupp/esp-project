@@ -7,31 +7,28 @@
 #   Variables and Constants
 ###############################################################################
 # enable the use of buildkit for multiarch builds
-export DOCKER_BUILDKIT = 1
+export DOCKER_BUILDKIT=1
 
 # git related stuff here
-GIT_TAG ?= $(shell git rev-parse --short HEAD)
-GIT_REPO ?= $(shell git rev-parse --show-toplevel | awk -F/ '{print $NF}')
+GIT_TAG?=$(shell git rev-parse --short HEAD)
+GIT_REPO?=$(shell git rev-parse --show-toplevel | awk -F '/' '{print $NF}')
 
 # Docker stuff
-HUB_USER ?= iammrcupp
-HUB_REPO ?= ${GIT_REPO}
-HUB_PULL_SECRET ?= $(shell docker secret list | grep DockerHub | cut -f1 -d' ')
-TAG ?= ${GIT_TAG}
-DEV_IMAGE ?= ${HUB_REPO}:latest
-PROD_IMAGE ?= ${HUB_USER}/${HUB_REPO}:${TAG}
-BUILDX_PLATFORMS ?= linux/amd64,linux/arm64,linux/arm/v6,linux/arm/v7,linux/riscv64,linux/386
-
+HUB_USER?=iammrcupp
+HUB_REPO?=${GIT_REPO}
+HUB_PULL_SECRET?=$(shell docker secret list | grep DockerHub | cut -f1 -d' ')
+TAG?=${GIT_TAG}
+DEV_IMAGE?=${HUB_REPO}:latest
+PROD_IMAGE?=${HUB_USER}/${HUB_REPO}:${TAG}
+BUILDX_PLATFORMS?='linux/amd64,linux/arm64,linux/arm/v6,linux/arm/v7,linux/riscv64,linux/386'
 
 ###############################################################################
 #   make stuff here
 ###############################################################################
 # build image locally and use it for DEV purposes
-.PHONY dev
-all: dev 
+.PHONY dev 
 dev: 
-	@COMPOSE_DOCKER_CLI_BUILD=1 docker-compose -f docker-compose.yaml up --build
-
+	@COMPOSE_DOCKER_CLI_BUILD=1 IMAGE=${DEV_IMAGE} docker-compose -f docker-compose.yaml up --build
 
 # run unit tests
 .PHONY build-test unit-test test
@@ -56,16 +53,16 @@ push:
 # run PRODUCTION locally
 .PHONY deploy run logs down
 run:
-	PROD_IMAGE=${PROD_IMAGE} docker-compose -f docker-compose.yaml up -d
+	IMAGE=${PROD_IMAGE} docker-compose -f docker-compose.yaml up -d
 
 logs:
-	PROD_IMAGE=${PROD_IMAGE} docker-compose -f docker-compose.yaml logs
+	IMAGE=${PROD_IMAGE} docker-compose -f docker-compose.yaml logs
 
 down:
-	PROD_IMAGE=${PROD_IMAGE} docker-compose -f docker-compose.yaml down
+	IMAGE=${PROD_IMAGE} docker-compose -f docker-compose.yaml down
 
 deploy: build push check-env
-	HUB_PULL_SECRET=${HUB_PULL_SECRET} PROD_IMAGE=${PROD_IMAGE} docker compose up
+	HUB_PULL_SECRET=${HUB_PULL_SECRET} IMAGE=${PROD_IMAGE} docker compose up
 
 
 # remove and cleanup DEV environment
@@ -77,6 +74,7 @@ clean:
 
 
 .PHONY check-env
+check-env:
 ifndef HUB_PULL_SECRET
 	$(error HUB_PULL_SECRET is undefined. Ensure this has the proper API access token)
 endif
