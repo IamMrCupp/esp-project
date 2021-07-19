@@ -90,4 +90,4 @@ cross-build:
 
 cross-build-dev: 
 	@docker buildx create --name mutiarchbuilder --use
-	@docker buildx build --platform ${BUILDX_PLATFORMS} -t ${PROD_IMAGE} .
+	@docker buildx build --platform ${BUILDX_PLATFORMS} -t ${DEV_IMAGE} .
