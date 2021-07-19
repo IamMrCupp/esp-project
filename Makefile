@@ -2,7 +2,6 @@
 # Makefile to control building images for docker/k8s use 
 #  -  Emotional Support Pizza 
 ###################################################################################################
-
 ###############################################################################
 #   Variables and Constants
 ###############################################################################
@@ -20,7 +19,7 @@ HUB_PULL_SECRET?=$(shell docker secret list | grep DockerHub | cut -f1 -d' ')
 TAG?=${GIT_TAG}
 DEV_IMAGE?=${HUB_REPO}:latest
 PROD_IMAGE?=${HUB_USER}/${HUB_REPO}:${TAG}
-BUILDX_PLATFORMS?='linux/amd64,linux/arm64,linux/arm/v6,linux/arm/v7,linux/riscv64,linux/386'
+BUILDX_PLATFORMS?=linux/amd64,linux/arm64,linux/arm/v6,linux/arm/v7,linux/riscv64,linux/386
 
 ###############################################################################
 #   make stuff here
@@ -53,16 +52,16 @@ push:
 # run PRODUCTION locally
 .PHONY deploy run logs down
 run:
-	IMAGE=${PROD_IMAGE} docker-compose -f docker-compose.yaml up -d
+	@IMAGE=${PROD_IMAGE} docker-compose -f docker-compose.yaml up -d
 
 logs:
-	IMAGE=${PROD_IMAGE} docker-compose -f docker-compose.yaml logs
+	@IMAGE=${PROD_IMAGE} docker-compose -f docker-compose.yaml logs
 
 down:
-	IMAGE=${PROD_IMAGE} docker-compose -f docker-compose.yaml down
+	@IMAGE=${PROD_IMAGE} docker-compose -f docker-compose.yaml down
 
 deploy: build push check-env
-	HUB_PULL_SECRET=${HUB_PULL_SECRET} IMAGE=${PROD_IMAGE} docker compose up
+	@HUB_PULL_SECRET=${HUB_PULL_SECRET} IMAGE=${PROD_IMAGE} docker compose up
 
 
 # remove and cleanup DEV environment
@@ -75,9 +74,9 @@ clean:
 
 .PHONY check-env
 check-env:
-ifndef HUB_PULL_SECRET
-	$(error HUB_PULL_SECRET is undefined. Ensure this has the proper API access token)
-endif
+	ifndef HUB_PULL_SECRET
+		$(error HUB_PULL_SECRET is undefined. Ensure this has the proper API access token)
+	endif
 
 
 # build multi-arch containers
