@@ -2,6 +2,6 @@ version: "3"
 
 services:
     website:
-        image: iammrcupp/esp-website
+        image: esp-website:latest
         ports:
             - 8000:80
