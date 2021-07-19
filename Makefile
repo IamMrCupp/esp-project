@@ -1,7 +1,11 @@
-# this is the Makefile for Docker builds
-#
-#################################################
+###################################################################################################
+# Makefile to control building images for docker/k8s use 
+#  -  Emotional Support Pizza 
+###################################################################################################
 
+###############################################################################
+#   Variables and Constants
+###############################################################################
 # enable the use of buildkit for multiarch builds
 export DOCKER_BUILDKIT = 1
 
@@ -19,6 +23,9 @@ PROD_IMAGE ?= ${HUB_USER}/${HUB_REPO}:${TAG}
 BUILDX_PLATFORMS ?= linux/amd64,linux/arm64,linux/arm/v6,linux/arm/v7,linux/riscv64,linux/386
 
 
+###############################################################################
+#   make stuff here
+###############################################################################
 # build image locally and use it for DEV purposes
 .PHONY dev
 all: dev 
@@ -71,11 +78,16 @@ clean:
 
 .PHONY check-env
 ifndef HUB_PULL_SECRET
-	$(error HUB_PULL_SECRET is undefined. Use docker ecs secret ls to find the ARN)
+	$(error HUB_PULL_SECRET is undefined. Ensure this has the proper API access token)
 endif
 
+
 # build multi-arch containers
-.PHONY cross-build
+.PHONY cross-build cross-build-dev
 cross-build:
 	@docker buildx create --name mutiarchbuilder --use
 	@docker buildx build --platform ${BUILDX_PLATFORMS} -t ${PROD_IMAGE} --push .
+
+cross-build-dev: 
+	@docker buildx create --name mutiarchbuilder --use
+	@docker buildx build --platform ${BUILDX_PLATFORMS} -t ${PROD_IMAGE} .
