@@ -17,10 +17,11 @@ HUB_USER?=iammrcupp
 HUB_REPO?=${GIT_REPO}
 HUB_PULL_SECRET?=$(shell docker secret list | grep DockerHub | cut -f1 -d' ')
 TAG?=${GIT_TAG}
-DEV_IMAGE?=${HUB_REPO}:latest
+DEV_LOCAL_IMAGE?=${HUB_REPO}:edge
+DEV_IMAGE?=${HUB_USER}/${HUB_REPO}:edge
 PROD_IMAGE?=${HUB_USER}/${HUB_REPO}:${TAG}
-PROD_IMAGE_2?=${HUB_USER}/${HUB_REPO}:latest
-BUILDX_PLATFORMS?=linux/amd64,linux/arm64,linux/arm/v6,linux/arm/v7,linux/riscv64,linux/386
+PROD_IMAGE_LATEST?=${HUB_USER}/${HUB_REPO}:latest
+BUILDX_PLATFORMS?=linux/amd64,linux/arm64,linux/arm/v7
 
 ###############################################################################
 #   make stuff here
@@ -28,7 +29,7 @@ BUILDX_PLATFORMS?=linux/amd64,linux/arm64,linux/arm/v6,linux/arm/v7,linux/riscv6
 # build image locally and use it for DEV purposes
 .PHONY: dev 
 dev: 
-	@COMPOSE_DOCKER_CLI_BUILD=1 IMAGE=${DEV_IMAGE} docker-compose -f docker-compose.yaml up --build
+	@COMPOSE_DOCKER_CLI_BUILD=1 IMAGE=${DEV_LOCAL_IMAGE} docker-compose -f docker-compose.yaml up --build --force-recreate
 
 # run unit tests
 .PHONY: build-test unit-test test
@@ -84,7 +85,11 @@ endif
 .PHONY: cross-build cross-build-dev
 cross-build:
 	@docker buildx create --name mutiarchbuilder --use
-	@docker buildx build --platform ${BUILDX_PLATFORMS} -t ${PROD_IMAGE} -t ${PROD_IMAGE_2} --push .
+	@docker buildx build --platform ${BUILDX_PLATFORMS} -t ${PROD_IMAGE} -t ${PROD_IMAGE_LATEST} --push .
+
+cross-build-latest:
+	@docker buildx create --name mutiarchbuilder --use
+	@docker buildx build --platform ${BUILDX_PLATFORMS} -t ${PROD_IMAGE_LATEST} --push .
 
 cross-build-dev: 
 	@docker buildx create --name mutiarchbuilder --use
