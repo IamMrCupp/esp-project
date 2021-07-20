@@ -29,7 +29,7 @@ BUILDX_PLATFORMS?=linux/amd64,linux/arm64,linux/arm/v7
 # build image locally and use it for DEV purposes
 .PHONY: dev 
 dev: 
-	@COMPOSE_DOCKER_CLI_BUILD=1 IMAGE=${DEV_LOCAL_IMAGE} docker-compose -f docker-compose.yaml up --build
+	@COMPOSE_DOCKER_CLI_BUILD=1 IMAGE=${DEV_LOCAL_IMAGE} docker-compose -f docker-compose.yaml up --build --force-recreate
 
 # run unit tests
 .PHONY: build-test unit-test test
