@@ -9,8 +9,8 @@
 export DOCKER_BUILDKIT=1
 
 # git related stuff here
+GIT_REPO?=esp_project
 GIT_TAG?=$(shell git rev-parse --short HEAD)
-GIT_REPO?=$(shell git rev-parse --show-toplevel | awk -F '/' '{print $$NF}')
 
 # Docker stuff
 HUB_USER?=iammrcupp
