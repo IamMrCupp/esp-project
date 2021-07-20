@@ -98,6 +98,7 @@ workflows:
             branches:
               only: 
                 - dev
+                - dev/*
   build-branch-master:
     jobs:
       - build-master:
