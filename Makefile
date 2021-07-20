@@ -17,10 +17,17 @@ HUB_USER?=iammrcupp
 HUB_REPO?=${GIT_REPO}
 HUB_PULL_SECRET?=$(shell docker secret list | grep DockerHub | cut -f1 -d' ')
 TAG?=${GIT_TAG}
+# for local dev
 DEV_LOCAL_IMAGE?=${HUB_REPO}:edge
+# images for docker hub
 DEV_IMAGE?=${HUB_USER}/${HUB_REPO}:edge
 PROD_IMAGE?=${HUB_USER}/${HUB_REPO}:${TAG}
 PROD_IMAGE_LATEST?=${HUB_USER}/${HUB_REPO}:latest
+# images for ghcr.io
+GHCR_DEV_IMAGE?=${HUB_USER}/${HUB_REPO}:edge
+GHCR_PROD_IMAGE?=${HUB_USER}/${HUB_REPO}:${TAG}
+GHCR_PROD_IMAGE_LATEST?=${HUB_USER}/${HUB_REPO}:latest
+
 BUILDX_PLATFORMS?=linux/amd64,linux/arm64,linux/arm/v7
 
 ###############################################################################
@@ -93,4 +100,16 @@ cross-build-latest:
 
 cross-build-dev: 
 	@docker buildx create --name mutiarchbuilder --use
-	@docker buildx build --platform ${BUILDX_PLATFORMS} -t ${DEV_IMAGE} --push .
+	@docker buildx build --platform ${BUILDX_PLATFORMS} -t ${DEV_IMAGE} --push 	.
+
+cross-build-ghcr:
+	@docker buildx create --name mutiarchbuilder --use
+	@docker buildx build --platform ${BUILDX_PLATFORMS} -t ${GHCR_PROD_IMAGE} -t ${GHCR_PROD_IMAGE_LATEST} --push .
+
+cross-build-latest-ghcr:
+	@docker buildx create --name mutiarchbuilder --use
+	@docker buildx build --platform ${BUILDX_PLATFORMS} -t ${GHCR_PROD_IMAGE_LATEST} --push .
+
+cross-build-dev-ghcr: 
+	@docker buildx create --name mutiarchbuilder --use
+	@docker buildx build --platform ${BUILDX_PLATFORMS} -t ${GHCR_DEV_IMAGE} --push 	.
