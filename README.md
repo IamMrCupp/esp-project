@@ -1,5 +1,5 @@
-MASTER: [![CircleCI](https://circleci.com/gh/IamMrCupp/esp-project/tree/master.svg?style=svg)](https://circleci.com/gh/IamMrCupp/esp-project/tree/master)
-DEV: [![CircleCI](https://circleci.com/gh/IamMrCupp/esp-project/tree/master.svg?style=svg)](https://circleci.com/gh/IamMrCupp/esp-project/tree/dev)
+MASTER: [![CircleCI](https://circleci.com/gh/IamMrCupp/esp_project/tree/master.svg?style=svg)](https://circleci.com/gh/IamMrCupp/esp_project/tree/master)
+DEV: [![CircleCI](https://circleci.com/gh/IamMrCupp/esp_project/tree/master.svg?style=svg)](https://circleci.com/gh/IamMrCupp/esp_project/tree/dev)
 
 
 **Emotional Support Pizza**
