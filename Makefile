@@ -20,7 +20,7 @@ TAG?=${GIT_TAG}
 DEV_IMAGE?=${HUB_REPO}:latest
 PROD_IMAGE?=${HUB_USER}/${HUB_REPO}:${TAG}
 PROD_IMAGE_LATEST?=${HUB_USER}/${HUB_REPO}:latest
-BUILDX_PLATFORMS?=linux/amd64,linux/arm64,linux/arm/v6,linux/arm/v7,linux/riscv64,linux/386
+BUILDX_PLATFORMS?=linux/amd64,linux/arm64,linux/arm/v7
 
 ###############################################################################
 #   make stuff here
