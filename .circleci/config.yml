@@ -10,6 +10,41 @@ jobs:
       DOCKER_BUILDKIT: 1
       BUILDX_PLATFORMS: linux/amd64,linux/arm64,linux/arm/v7
     steps:
+      - slack/notify:
+          custom: |
+            {
+              "blocks": [
+                {
+                  "type": "header",
+                  "text": {
+                    "type": "plain_text",
+                    "text": "New Build Started! :thumbs_up:",
+                    "emoji": "true"
+                  },
+                  "type": "section",
+                  "fields": [
+                    {
+                      "type": "mrkdwn",
+                      "text": "*Triggered by*:\\n$CIRCLE_USERNAME" 
+                    },
+                    {
+                      "type": "mrkdwn",
+                      "text": "*Project*:\\n$CIRCLE_PROJECT_REPONAME" 
+                    },
+                    {
+                      "type": "mrkdwn",
+                      "text": "*Branch*:\\n$CIRCLE_BRANCH" 
+                    }
+                  ],
+                  "accessory": {
+                    "type": "image",
+                    "image_url": "https://assets.brandfolder.com/otz5mn-bw4j2w-6jzqo8/original/circle-logo-badge-black.png",
+                    "alt_text": "CircleCI Logo"
+                  }
+                }
+              ]
+            }
+          event: always
       - checkout
       - run:
           name: Log in to docker hub
@@ -45,6 +80,41 @@ jobs:
       DOCKER_BUILDKIT: 1
       BUILDX_PLATFORMS: linux/amd64,linux/arm64,linux/arm/v7
     steps:
+      - slack/notify:
+          custom: |
+            {
+              "blocks": [
+                {
+                  "type": "header",
+                  "text": {
+                    "type": "plain_text",
+                    "text": "New Build Started! :thumbs_up:",
+                    "emoji": "true"
+                  },
+                  "type": "section",
+                  "fields": [
+                    {
+                      "type": "mrkdwn",
+                      "text": "*Triggered by*:\\n$CIRCLE_USERNAME" 
+                    },
+                    {
+                      "type": "mrkdwn",
+                      "text": "*Project*:\\n$CIRCLE_PROJECT_REPONAME" 
+                    },
+                    {
+                      "type": "mrkdwn",
+                      "text": "*Branch*:\\n$CIRCLE_BRANCH" 
+                    }
+                  ],
+                  "accessory": {
+                    "type": "image",
+                    "image_url": "https://assets.brandfolder.com/otz5mn-bw4j2w-6jzqo8/original/circle-logo-badge-black.png",
+                    "alt_text": "CircleCI Logo"
+                  }
+                }
+              ]
+            }
+          event: always
       - checkout
       - run:
           name: Log in to docker hub
@@ -80,6 +150,41 @@ jobs:
       DOCKER_BUILDKIT: 1
       BUILDX_PLATFORMS: linux/amd64,linux/arm64,linux/arm/v7
     steps:
+      - slack/notify:
+          custom: |
+            {
+              "blocks": [
+                {
+                  "type": "header",
+                  "text": {
+                    "type": "plain_text",
+                    "text": "New Build Started! :thumbs_up:",
+                    "emoji": "true"
+                  },
+                  "type": "section",
+                  "fields": [
+                    {
+                      "type": "mrkdwn",
+                      "text": "*Triggered by*:\\n$CIRCLE_USERNAME" 
+                    },
+                    {
+                      "type": "mrkdwn",
+                      "text": "*Project*:\\n$CIRCLE_PROJECT_REPONAME" 
+                    },
+                    {
+                      "type": "mrkdwn",
+                      "text": "*Branch*:\\n$CIRCLE_BRANCH" 
+                    }
+                  ],
+                  "accessory": {
+                    "type": "image",
+                    "image_url": "https://assets.brandfolder.com/otz5mn-bw4j2w-6jzqo8/original/circle-logo-badge-black.png",
+                    "alt_text": "CircleCI Logo"
+                  }
+                }
+              ]
+            }
+          event: always
       - checkout
       - run:
           name: Log in to docker hub
