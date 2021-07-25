@@ -1,3 +1,4 @@
+# config for esp_project circleci
 version: 2.1
 orbs:
   slack: circleci/slack@4.4.2
@@ -10,6 +11,35 @@ jobs:
       DOCKER_BUILDKIT: 1
       BUILDX_PLATFORMS: linux/amd64,linux/arm64,linux/arm/v7
     steps:
+      - slack/notify:
+          custom: |
+            {
+              "blocks": [
+                {
+                  "type": "header",
+                  "text": {
+                    "type": "plain_text",
+                    "text": "New Build Started!"
+                  },
+                  "type": "section",
+                  "fields": [
+                    {
+                      "type": "mrkdwn",
+                      "text": "*Triggered by*: $CIRCLE_USERNAME" 
+                    },
+                    {
+                      "type": "mrkdwn",
+                      "text": "*Project*: $CIRCLE_PROJECT_REPONAME" 
+                    },
+                    {
+                      "type": "mrkdwn",
+                      "text": "*Branch*: $CIRCLE_BRANCH" 
+                    }
+                  ]
+                }
+              ]
+            }
+          event: always
       - checkout
       - run:
           name: Log in to docker hub
@@ -45,6 +75,35 @@ jobs:
       DOCKER_BUILDKIT: 1
       BUILDX_PLATFORMS: linux/amd64,linux/arm64,linux/arm/v7
     steps:
+      - slack/notify:
+          custom: |
+            {
+              "blocks": [
+                {
+                  "type": "header",
+                  "text": {
+                    "type": "plain_text",
+                    "text": "New Build Started!"
+                  },
+                  "type": "section",
+                  "fields": [
+                    {
+                      "type": "mrkdwn",
+                      "text": "*Triggered by*: $CIRCLE_USERNAME" 
+                    },
+                    {
+                      "type": "mrkdwn",
+                      "text": "*Project*: $CIRCLE_PROJECT_REPONAME" 
+                    },
+                    {
+                      "type": "mrkdwn",
+                      "text": "*Branch*: $CIRCLE_BRANCH" 
+                    }
+                  ]
+                }
+              ]
+            }
+          event: always
       - checkout
       - run:
           name: Log in to docker hub
@@ -80,6 +139,35 @@ jobs:
       DOCKER_BUILDKIT: 1
       BUILDX_PLATFORMS: linux/amd64,linux/arm64,linux/arm/v7
     steps:
+      - slack/notify:
+          custom: |
+            {
+              "blocks": [
+                {
+                  "type": "header",
+                  "text": {
+                    "type": "plain_text",
+                    "text": "New Build Started!"
+                  },
+                  "type": "section",
+                  "fields": [
+                    {
+                      "type": "mrkdwn",
+                      "text": "*Triggered by*: $CIRCLE_USERNAME" 
+                    },
+                    {
+                      "type": "mrkdwn",
+                      "text": "*Project*: $CIRCLE_PROJECT_REPONAME" 
+                    },
+                    {
+                      "type": "mrkdwn",
+                      "text": "*Branch*: $CIRCLE_BRANCH" 
+                    }
+                  ]
+                }
+              ]
+            }
+          event: always
       - checkout
       - run:
           name: Log in to docker hub
