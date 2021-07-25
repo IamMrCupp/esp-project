@@ -94,7 +94,8 @@ workflows:
     jobs:
       - build-dev:
           context:
-            - esp-project
+            - docker-env
+            - slack
           filters:
             branches:
               only: 
@@ -103,7 +104,8 @@ workflows:
     jobs:
       - build-master:
           context:
-            - esp-project
+            - docker-env
+            - slack
           filters:
             branches:
               only: 
@@ -112,7 +114,8 @@ workflows:
     jobs:
       - build-tags:
           context:
-            - esp-project
+            - docker-env
+            - slack
           filters:
             tags:
               only: 
